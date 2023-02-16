@@ -51,7 +51,7 @@ function Start-TeamsUpdate {
     $timeLAT = (Get-Item $teamsUpd).LastAccessTime
     $timeSpan = (New-TimeSpan -Start $timeLAT -End $timeNow).Hours
 
-    Write-Host "`n[info] Update:`n`tCheck for updates if (update.exe).accesstime < 72 hours`n`t Last access: $($timeSpan) hours ago"
+    Write-Host "`n[INFO] Update:`n`tCheck for updates if (update.exe).accesstime < 72 hours`n`t Last accessed: $($timeSpan) hours ago"
 
     if ($timeSpan -ge 72) {
         Write-Host "`n[INFO] Update: Checking for updates..." -ForegroundColor Yellow

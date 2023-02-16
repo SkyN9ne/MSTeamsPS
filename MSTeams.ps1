@@ -1,9 +1,11 @@
-# Hide progress, save time
+#!/usr/bin/env pwsh
+
 $ProgressPreference = 'SilentlyContinue'
+# Hide progress to save time
 
 # Log
 $logDir = "$($env:TEMP)\TeamsPS1\"
-$logTxt = '{0}{1}' -F $logDir,"teamsp1.txt"
+$logTxt = '{0}{1}' -F $logDir,"TeamsPS1Log.txt"
 
 ### ---------- Installation check
 function Get-TeamsInstallationCheck { 
@@ -70,7 +72,7 @@ function Start-TeamsInstallation {
         [Parameter()][string]$teamsExe = "$($env:TEMP)\Teams\Teams_windows_x64.exe" # .EXE saved here
     )
 
-    # Write-Host "`n[INFO] Action:`n`tStopping Teams (if running)..."
+    # Write-Host "`n[INFO] Action:`n`tStopping MS Teams (if running)..."
     # Get-Process teams -ErrorAction SilentlyContinue | Stop-Process -ErrorAction SilentlyContinue -PassThru
 
     if (!(Test-Path $teamsExe)) {
@@ -78,7 +80,7 @@ function Start-TeamsInstallation {
         Invoke-WebRequest -Uri $teamsUrl -OutFile $teamsExe -UseBasicParsing
     } 
 
-    Write-Host "`tInstalling..."
+    Write-Host "`tInstalling..." -ForegroundColor Green
 
     Start-Process -FilePath $teamsExe -ArgumentList "-s" -Wait -PassThru
     Start-Process -FilePath $teamsUpd -ArgumentList "--processStart teams.exe" -PassThru
